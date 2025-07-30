@@ -4,7 +4,7 @@ import { api } from '../services/api'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../components/Modal'
-import { Plus, Edit, Trash2, FileText, Eye, Code } from 'lucide-react'
+import { Plus, Edit, Trash2, FileText, Eye, Code, Database } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
 interface Form {
@@ -104,6 +104,10 @@ const FormsPage: React.FC = () => {
     navigate('/forms/builder')
   }
 
+  const handleViewData = (formId: string) => {
+    navigate(`/forms/${formId}/data`)
+  }
+
   const closeModal = () => {
     setIsCreateModalOpen(false)
     setEditingForm(null)
@@ -149,6 +153,13 @@ const FormsPage: React.FC = () => {
                     {form.is_custom ? (
                       <Code className="w-5 h-5 text-accent-600" />
                     ) : (
+                    <button
+                      onClick={() => handleViewData(form.id)}
+                      className="p-2 text-secondary-600 hover:text-success-600 hover:bg-success-50 rounded-lg transition-colors"
+                      title="View Data"
+                    >
+                      <Database className="w-4 h-4" />
+                    </button>
                       <FileText className="w-5 h-5 text-primary-600" />
                     )}
                   </div>

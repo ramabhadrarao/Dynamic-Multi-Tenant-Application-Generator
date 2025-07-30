@@ -9,6 +9,7 @@ import UsersPage from './pages/UsersPage'
 import RolesPage from './pages/RolesPage'
 import FormsPage from './pages/FormsPage'
 import FormBuilderPage from './pages/FormBuilderPage'
+import FormDataPage from './pages/FormDataPage'
 import ReportsPage from './pages/ReportsPage'
 import ReportBuilderPage from './pages/ReportBuilderPage'
 import PermissionsPage from './pages/PermissionsPage'
@@ -35,6 +36,7 @@ function App() {
         <Route path="/roles" element={<RolesPage />} />
         <Route path="/forms" element={<FormsPage />} />
         <Route path="/forms/builder/:id?" element={<FormBuilderPage />} />
+        <Route path="/forms/:formId/data" element={<FormDataPage />} />
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/reports/builder/:id?" element={<ReportBuilderPage />} />
         <Route path="/permissions" element={<PermissionsPage />} />

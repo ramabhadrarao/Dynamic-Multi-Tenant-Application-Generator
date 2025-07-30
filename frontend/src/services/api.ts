@@ -246,6 +246,63 @@ class ApiService {
   deleteReportPermission(roleId: string, reportId: string) {
     return this.api.delete(`/permissions/reports/role/${roleId}/report/${reportId}`)
   }
+
+  // Form Data endpoints
+  createFormData(formId: string, data: any) {
+    return this.api.post(`/form-data/${formId}`, data)
+  }
+
+  getFormData(formId: string, page?: number, limit?: number, filters?: any) {
+    const params = { page, limit, ...filters }
+    return this.api.get(`/form-data/${formId}`, { params })
+  }
+
+  getFormDataById(formId: string, recordId: string) {
+    return this.api.get(`/form-data/${formId}/${recordId}`)
+  }
+
+  updateFormData(formId: string, recordId: string, data: any) {
+    return this.api.put(`/form-data/${formId}/${recordId}`, data)
+  }
+
+  deleteFormData(formId: string, recordId: string) {
+    return this.api.delete(`/form-data/${formId}/${recordId}`)
+  }
+
+  exportFormData(formId: string, format: 'csv' | 'json' = 'csv') {
+    return this.api.get(`/form-data/${formId}/export/${format}`, {
+      responseType: 'blob'
+    })
+  }
+
+  bulkCreateFormData(formId: string, records: any[]) {
+    return this.api.post(`/form-data/${formId}/bulk`, { records })
+  }
+
+  bulkDeleteFormData(formId: string, recordIds: string[]) {
+    return this.api.delete(`/form-data/${formId}/bulk`, { data: { recordIds } })
+  }
+
+  // Dynamic Tables endpoints
+  createTableForForm(formId: string) {
+    return this.api.post(`/dynamic-tables/form/${formId}/create`)
+  }
+
+  updateTableForForm(formId: string) {
+    return this.api.post(`/dynamic-tables/form/${formId}/update`)
+  }
+
+  dropTableForForm(formId: string) {
+    return this.api.delete(`/dynamic-tables/form/${formId}`)
+  }
+
+  getTableStructure(tableName: string) {
+    return this.api.get(`/dynamic-tables/structure/${tableName}`)
+  }
+
+  listTables() {
+    return this.api.get('/dynamic-tables/list')
+  }
 }
 
 export const authApi = new ApiService()
